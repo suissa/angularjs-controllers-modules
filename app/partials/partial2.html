@@ -1,6 +1,18 @@
 <h2>Users</h2>
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+
+
+<section class="vcard">
+  <div>
+    <img ng-src="{{ user.avatar_url }}" alt="{{ user.name }}" width="100">
+  </div>
+  <div>
+    Nickname: <span class="fn nickname">{{ user.login }}</span>
+  </div>
+  <div> 
+    Blog: <a class="url fn org" data-ng-href="{{ user.blog }}">{{ user.blog }}</a>
+  <div></div>
+  <div class="adr">
+    <span class="type">Location</span>:
+    <span class="locality">{{ user.location }}</span>
+  </div>
+</section>

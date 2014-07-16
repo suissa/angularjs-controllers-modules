@@ -1,3 +1,66 @@
+Sempre me perguntam como eu organizo meus controllers para não ficar uma bagunça e sempre respondo da seguinte forma:
+
+Primeiramente eu crio um [module](https://docs.angularjs.org/guide/module) para os controllers de uma entidade, por exemplo `beers`:
+
+    angular.module('BeerControllers', []).
+      controller('BeerCreateController', ['$scope', function ($scope) {
+        
+      }]).
+      controller('BeerRetrieveController', ['$scope', function ($scope) {
+        console.log('BeerRetrieveController');
+        
+      }]).
+      controller('BeerUpdateController', ['$scope', function ($scope) {
+        
+      }]).
+      controller('BeerDeleteController', ['$scope', function ($scope) {
+        
+      }]);
+      
+E `users` como exemplo:
+
+    angular.module('UserControllers', []).
+      controller('UserCreateController', ['$scope', function ($scope) {
+        
+      }]).
+      controller('UserRetrieveController', ['$scope', function ($scope) {
+        console.log('UserRetrieveController');
+        
+      }]).
+      controller('UserUpdateController', ['$scope', function ($scope) {
+        
+      }]).
+      controller('UserDeleteController', ['$scope', function ($scope) {
+        
+      }]);
+
+
+Depois eu crio um módulo apenas de controllers que irá encapsular todos os outros controllers:
+
+    angular.module('myApp.controllers', ['UserControllers', 'BeerControllers']);
+
+
+Depois no meu `app.js` a lista de dependências ficará menor do que passar todos os controllers diretamente aqui:
+
+    angular.module('myApp', [
+      'ngRoute',
+      'myApp.filters',
+      'myApp.services',
+      'myApp.directives',
+      'myApp.controllers'
+    ]).
+    
+Uma das grandes qualidades do AngularJs é essa facilidade de modularizar seu código. Com esse conceito você pode granularizar ainda mais seus módulos, só depende de você.
+
+Exemplo do código funcional: [https://github.com/suissa/angularjs-controllers-modules](https://github.com/suissa/angularjs-controllers-modules)
+
+
+_#ficadica
+[Modularizing AngularJS Applications](http://henriquat.re/modularizing-angularjs/modularizing-angular-applications/modularizing-angular-applications.html)
+
+Nesse projeto foi utilizado angular-seed que você pode ler seu README logo abaixo:
+
+
 # angular-seed — the seed for AngularJS apps
 
 This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
